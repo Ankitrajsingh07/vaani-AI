@@ -1,0 +1,276 @@
+body {
+    margin: 0;
+    padding-top: 70px;
+    padding-bottom: 30px;
+    background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+    color: #00ffff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Container */
+#chat-section {
+    width: 450px;
+    margin: auto;
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* Title */
+h1 {
+    text-shadow: 0 0 10px cyan, 0 0 20px cyan;
+}
+
+/* Chat Box */
+#chat {
+    height: 350px;
+    overflow-y: auto;
+    border: 1px solid cyan;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.6);
+    box-shadow: 0 0 10px cyan;
+    text-align: left;
+}
+
+/* Chat Text */
+#chat p {
+    margin: 5px 0;
+}
+
+/* Input Box */
+input {
+    width: 65%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+/* Buttons */
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    background: cyan;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+/* Button Hover */
+button:hover {
+    background: #00aaaa;
+    box-shadow: 0 0 10px cyan;
+}
+
+/* 🎤 Mic Animation */
+#mic-animation {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: cyan;
+    margin: 10px auto;
+    opacity: 0.5;
+    box-shadow: 0 0 15px cyan;
+    transition: 0.3s;
+}
+#login-section {
+    margin-bottom: 20px;
+}
+/*  Login Page Styling */
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width:100%;
+}
+
+/* Login Card */
+.login-box {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px cyan;
+    width: 300px;
+    text-align: center;
+}
+
+/* Heading */
+.login-box h2 {
+    margin-bottom: 20px;
+    color: cyan;
+}
+
+/* Inputs */
+.login-box input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/* Buttons */
+.login-box button {
+    width: 100%;
+    margin-top: 10px;
+}
+.login-box {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+#navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: black;
+    padding: 10px;
+    text-align: center;
+}
+
+#navbar button {
+    margin: 5px;
+    padding: 10px 15px;
+    background: cyan;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.info-section {
+    margin-top: 80px;
+    padding: 20px;
+    text-align: center;
+}
+/* Section Title */
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+    color: cyan;
+}
+
+/* Container */
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* Glass Card */
+.glass-card {
+    width: 280px;
+    padding: 20px;
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(0, 255, 255, 0.2);
+
+    color: white;
+    text-align: center;
+
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+
+    transition: 0.3s;
+}
+
+/* Hover Effect */
+.glass-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px cyan;
+}
+
+/* List styling */
+.glass-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.glass-card ul li {
+    margin: 5px 0;
+}
+/* Links inside cards */
+.glass-card a {
+    display: inline-block;
+    margin-top: 10px;
+    color: cyan;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Contact Form */
+.contact-form {
+    margin: 40px auto;
+    width: 100%;
+    max-width: 350px;
+    padding: 20px;
+}
+
+/* Inputs */
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    max-width:100%;
+    margin: 10px 0;
+    padding: 12px;
+
+    border-radius: 8px;
+    border: none;
+
+    outline: none;
+
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+
+    backdrop-filter: blur(5px);
+}
+
+/* Placeholder color */
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #ccc;
+}
+
+/* Textarea */
+.contact-form textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* Button */
+.contact-form button {
+    width: 100%;
+    padding: 12px;
+
+    background: cyan;
+    color: black;
+
+    border: none;
+    border-radius: 8px;
+
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+/* Hover effect */
+.contact-form button:hover {
+    background: #00ffff;
+    transform: scale(1.05);
+}
+* {
+    box-sizing: border-box;
+}

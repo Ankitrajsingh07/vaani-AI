@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vaani AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- NAVBAR SECTION -->
+<div id="navbar">
+    <button onclick="showSection('chat')">Home</button>
+    <button onclick="showSection('about')">About</button>
+    <button onclick="showSection('contact')">Contact</button>
+</div>
+
+<!-- LOGIN SECTION -->
+<div id="login-section" class="login-container">
+    <div class="login-box">
+        <h2>Vaani AI Login</h2>
+
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+
+        <button onclick="login()">Login</button>
+        <button onclick="register()">Register</button>
+    </div>
+</div>
+
+<!-- 🤖 CHAT SECTION -->
+<div id="chat-section" style="display:none;">
+    <h1>🤖 Vaani AI</h1>
+
+    <div id="chat"></div>
+
+    <div id="mic-animation"></div>
+
+    <input type="text" id="input" placeholder="Type message...">
+
+    <button onclick="sendMessage()">Send</button>
+    <button onclick="startVoice()">🎤 Speak</button>
+
+
+    <button onclick="logout()">Logout</button>
+</div>
+
+<!-- ABOUT SECTION -->
+ <div id="about-section" style="display:none;" class="info-section">
+
+    <h2 class="section-title">About Vaani AI</h2>
+
+    <div class="card-container">
+
+        <!-- WHAT IS VAANI -->
+        <div class="glass-card">
+            <h3>🤖 What is Vaani AI?</h3>
+            <p>
+                Vaani AI is an intelligent virtual assistant designed to interact
+                using both voice and text. It helps users perform daily tasks,
+                answer queries, and automate system-level actions efficiently.
+            </p>
+        </div>
+
+        <!-- FEATURES -->
+        <div class="glass-card">
+            <h3>⚡ Key Features</h3>
+            <ul>
+                <li>Voice & Text Interaction</li>
+                <li>AI-powered Responses</li>
+                <li>Real-time Weather Updates</li>
+                <li>Google Search Integration</li>
+                <li>Open System Applications</li>
+                <li>User Authentication System</li>
+            </ul>
+        </div>
+
+        <!-- HOW IT WORKS -->
+        <div class="glass-card">
+            <h3>⚙️ How It Works</h3>
+            <p>
+                The system processes user input using intent recognition.
+                Based on the detected intent, it performs actions like fetching data,
+                opening applications, or generating AI responses using APIs.
+            </p>
+        </div>
+
+        <!-- TECH STACK -->
+        <div class="glass-card">
+            <h3>🛠 Tech Stack</h3>
+            <ul>
+                <li>Frontend: HTML, CSS, JavaScript</li>
+                <li>Backend: Python (Flask)</li>
+                <li>APIs: OpenAI, Weather API</li>
+                <li>Database: MongoDB</li>
+            </ul>
+        </div>
+
+        <!-- VISION -->
+        <div class="glass-card">
+            <h3>🚀 Vision</h3>
+            <p>
+                The goal of Vaani AI is to evolve into a fully automated personal
+                assistant capable of managing tasks, improving productivity, and
+                integrating with smart systems.
+            </p>
+        </div>
+
+        <!-- FUTURE SCOPE -->
+        <div class="glass-card">
+            <h3>🔮 Future Enhancements</h3>
+            <ul>
+                <li>Mobile App Integration</li>
+                <li>Smart Home Control</li>
+                <li>Advanced NLP Understanding</li>
+                <li>Multi-language Support</li>
+                <li>Cloud Deployment & Scaling</li>
+            </ul>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CONTACT SECTION -->
+ <div id="contact-section" style="display:none;" class="info-section">
+
+    <h2 class="section-title">Contact Me</h2>
+
+    <div class="card-container">
+
+        <!-- NAME -->
+        <div class="glass-card">
+            <h3>👤 Developer</h3>
+            <p>Ankit Raj</p>
+            <p>Pranav kumar </p>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="glass-card">
+            <h3>📧 Email</h3>
+            <p>ankitraj36999@gmail.com</p>
+            <a href="mailto:ankitraj36999@gmail.com">Send Email</a>
+        </div>
+
+        <!-- LINKEDIN -->
+        <div class="glass-card">
+            <h3>💼 LinkedIn</h3>
+            <a href="https://www.linkedin.com/in/ankitrajsingh-dev/" target="_blank">
+                View Profile
+            </a>
+        </div>
+
+        <!-- GITHUB (ADD THIS) -->
+        <div class="glass-card">
+            <h3>💻 GitHub</h3>
+            <a href="https://github.com/Ankitrajsingh07" target="_blank">
+                View Projects
+            </a>
+        </div>
+
+    </div>
+
+    <!-- MESSAGE BOX -->
+<div class="contact-form glass-card">
+
+    <h3>📩 Send a Message</h3>
+
+    <input type="text" id="contact-name" placeholder="Your Name">
+    <input type="email" id="contact-email" placeholder="Your Email">
+    <textarea id="contact-message" placeholder="Your Message"></textarea>
+
+    <button onclick="sendContactMessage()">Send Message</button>
+
+</div>
+
+</div>
+
+
+
+
+
+<!--JAVASCRIPT-->
+<script>
+
+//  REGISTER
+function register() {
+    fetch("/register", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            username: document.getElementById("username").value,
+            password: document.getElementById("password").value
+        })
+    })
+    .then(res => res.json())
+    .then(data => alert(data.message));
+}
+
+
+// LOGIN
+function login() {
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    if (!username || !password) {
+        alert("Enter username and password");
+        return;
+    }
+
+    fetch("/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        console.log("Login response:", data);
+
+        if (data.message === "Login successful") {
+            document.getElementById("login-section").style.display = "none";
+            document.getElementById("chat-section").style.display = "block";
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Login failed");
+    });
+}
+
+
+//LOGOUT
+function logout() {
+    fetch("/logout")
+    .then(() => {
+
+        let login = document.getElementById("login-section");
+        let chat = document.getElementById("chat-section");
+
+        chat.style.display = "none";
+
+      
+        login.style.display = "flex";  
+
+        document.getElementById("chat").innerHTML = "";
+    });
+}
+
+
+// SPEAK
+function speak(text) {
+    let speech = new SpeechSynthesisUtterance(text);
+    speech.lang = "en-US";
+    window.speechSynthesis.speak(speech);
+}
+
+
+//  SEND MESSAGE 
+function sendMessage(text) {
+
+    let chat = document.getElementById("chat");
+    let inputBox = document.getElementById("input");
+
+    let input = text || inputBox.value.trim();
+    if (!input) return;
+
+    // Show user message
+    let userMsg = document.createElement("p");
+    userMsg.innerHTML = "<b>You:</b> " + input;
+    chat.appendChild(userMsg);
+
+    // Show loading
+    let loading = document.createElement("p");
+    loading.id = "loading";
+    loading.innerText = "Vaani is thinking...";
+    chat.appendChild(loading);
+
+    inputBox.value = "";
+
+    fetch("/command", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({message: input})
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        console.log("Response:", data);
+
+        let loading = document.getElementById("loading");
+        if (loading) loading.remove();
+
+        if (data.response === "Please login first") {
+            alert("Please login first");
+            return;
+        }
+
+        // Show AI response
+        let botMsg = document.createElement("p");
+        botMsg.innerHTML = "<b>Vaani:</b> " + data.response;
+        chat.appendChild(botMsg);
+
+        // Voice
+        speak(data.response);
+
+        // Open URL
+        if (data.action === "open_url") {
+            window.open(data.url, "_blank");
+        }
+
+        // Google search
+        if (data.action === "search_google") {
+            let url = "https://www.google.com/search?q=" + encodeURIComponent(data.query);
+            window.open(url, "_blank");
+        }
+
+        chat.scrollTop = chat.scrollHeight;
+    })
+    .catch(err => {
+        console.error(err);
+
+        let loading = document.getElementById("loading");
+        if (loading) loading.remove();
+
+        chat.innerHTML += "<p>Error occurred</p>";
+    });
+}
+
+
+//  VOICE INPUT
+function startVoice() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+        alert("Use Google Chrome");
+        return;
+    }
+
+    let recognition = new SpeechRecognition();
+
+    let mic = document.getElementById("mic-animation");
+    mic.style.opacity = "1";
+
+    recognition.start();
+
+    recognition.onresult = function(event) {
+        let text = event.results[0][0].transcript;
+        sendMessage(text);
+    };
+
+    recognition.onend = function() {
+        mic.style.opacity = "0.5";
+    };
+
+    recognition.onerror = function(event) {
+        console.error(event.error);
+    };
+}
+
+//NAVBAR FUNCTIONALITY
+function showSection(section) {
+
+    let isLoggedIn = document.getElementById("chat-section").style.display === "block";
+
+    // Hide all
+    document.getElementById("chat-section").style.display = "none";
+    document.getElementById("about-section").style.display = "none";
+    document.getElementById("contact-section").style.display = "none";
+
+    if (section === "chat") {
+        if (!isLoggedIn) {
+            alert("Please login first");
+            document.getElementById("login-section").style.display = "flex";
+            return;
+        }
+        document.getElementById("chat-section").style.display = "block";
+    }
+
+    if (section === "about") {
+        document.getElementById("about-section").style.display = "block";
+    }
+
+    if (section === "contact") {
+        document.getElementById("contact-section").style.display = "block";
+    }
+}
+
+// send contact message function
+function sendContactMessage() {
+
+    let name = document.getElementById("contact-name").value.trim();
+    let email = document.getElementById("contact-email").value.trim();
+    let message = document.getElementById("contact-message").value.trim();
+
+    if (!name || !email || !message) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    fetch("/contact", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            name: name,
+            email: email,
+            message: message
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+
+        // clear fields
+        document.getElementById("contact-name").value = "";
+        document.getElementById("contact-email").value = "";
+        document.getElementById("contact-message").value = "";
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Failed to send message");
+    });
+}
+
+</script>
+
+</body>
+</html>
