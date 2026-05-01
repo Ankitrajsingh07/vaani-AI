@@ -1,13 +1,12 @@
 import os 
 import platform
-from flask import Flask, render_template, request, jsonify
-
-from database import register_user, login_user, save_contact, save_chat
-from openai import OpenAI
-from flask import session
 import datetime
 import pytz
 import requests
+from flask import Flask, render_template, request, jsonify
+from database import register_user, login_user, save_contact, save_chat
+from openai import OpenAI
+from flask import session
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -34,15 +33,10 @@ def ask_ai(prompt):
     try:
         global chat_history
 
-        # 🔍 DEBUG: check API key
-        api_key = os.getenv("OPENAI_API_KEY")
-        print("API KEY FOUND:", bool(api_key))
-
-        # Add user message
         chat_history.append({"role": "user", "content": prompt})
-
-        # Keep last 6 messages
         chat_history = chat_history[-6:]
+
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
         response = client.chat.completions.create(
             model="gpt-4o-mini",
@@ -53,14 +47,12 @@ def ask_ai(prompt):
         )
 
         reply = response.choices[0].message.content.strip()
-
         chat_history.append({"role": "assistant", "content": reply})
 
         return reply
 
-    except Exception as e:
-        print("🚨 AI FULL ERROR:", str(e))   # IMPORTANT
-        return f"AI error: {str(e)}"
+    except Exception:
+        return "AI is currently unavailable. Please try again later."
 
 #  WEATHER FUNCTION
 def get_weather(city):
@@ -190,7 +182,7 @@ def command():
 
         # INTENT HANDLING
         if intent == "greeting":
-            response = "Hello Ankit!"
+            response = f"Hello {session.get('user', '')}!"
         
         #time
 
@@ -251,7 +243,7 @@ def command():
                     os.system("start notepad")
                     response = "Opening Notepad"
                 else:
-                    response = "Feature not available online"
+                    response = "This Feature works only on your local machine, not in the web version."
             except Exception as e:
                 print("Notepad Error:", e)
                 response = "Failed to open Notepad"
@@ -263,7 +255,7 @@ def command():
                     os.system("start calc")
                     response = "Opening Calculator"
                 else:
-                    response = "Feature not available online"
+                    response = "This Feature works only on your local machine, not in the web version."
             except Exception as e:
                 print("Calculator Error:", e)
                 response = "Failed to open Calculator"
