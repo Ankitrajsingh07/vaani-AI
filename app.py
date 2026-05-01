@@ -6,14 +6,14 @@ from database import register_user, login_user, save_contact, save_chat
 from openai import OpenAI
 from flask import session
 import datetime
+import pytz
 import requests
 
 from dotenv import load_dotenv
 load_dotenv()
 
 
-#initialize open AI client 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 
 
 
@@ -29,6 +29,8 @@ app.secret_key = os.getenv("SECRET_KEY")
 
 #AI function
 def ask_ai(prompt):
+    #initialize open AI client 
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     try:
         global chat_history
 
@@ -190,7 +192,8 @@ def command():
         #time
 
         elif intent == "time":
-            now = datetime.datetime.now().strftime("%H:%M")
+            ist = pytz.timezone("Asia/Kolkata")
+            now = datetime.datetime.now(ist).strftime("%H:%M")
             response = f"Current time is {now}"
         
         #youtube
