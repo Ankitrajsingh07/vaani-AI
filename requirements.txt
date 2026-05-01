@@ -1,0 +1,7 @@
+flask
+gunicorn
+pymongo
+python-dotenv
+werkzeug
+openai
+requests
