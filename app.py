@@ -2,7 +2,7 @@ import os
 import platform
 from flask import Flask, render_template, request, jsonify
 
-from database import register_user, login_user, save_contact
+from database import register_user, login_user, save_contact, save_chat
 from openai import OpenAI
 from flask import session
 import datetime
