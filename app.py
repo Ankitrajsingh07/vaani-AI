@@ -15,7 +15,8 @@ load_dotenv()
 
 
 
-
+ #initialize open AI client 
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 #create chat memory list
 chat_history = []
@@ -28,16 +29,19 @@ app.secret_key = os.getenv("SECRET_KEY")
 
 
 #AI function
+
 def ask_ai(prompt):
-    #initialize open AI client 
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     try:
         global chat_history
+
+        # 🔍 DEBUG: check API key
+        api_key = os.getenv("OPENAI_API_KEY")
+        print("API KEY FOUND:", bool(api_key))
 
         # Add user message
         chat_history.append({"role": "user", "content": prompt})
 
-        # Keep last 6 messages (cost control)
+        # Keep last 6 messages
         chat_history = chat_history[-6:]
 
         response = client.chat.completions.create(
@@ -50,14 +54,13 @@ def ask_ai(prompt):
 
         reply = response.choices[0].message.content.strip()
 
-        # Add AI reply to history
         chat_history.append({"role": "assistant", "content": reply})
 
         return reply
 
     except Exception as e:
-        print("AI Error:", e)
-        return "Sorry, something went wrong"
+        print("🚨 AI FULL ERROR:", str(e))   # IMPORTANT
+        return f"AI error: {str(e)}"
 
 #  WEATHER FUNCTION
 def get_weather(city):
