@@ -302,8 +302,7 @@ def command():
             response = ask_ai(user_input)
 
         # 💾 SAVE CHAT
-        
-
+        save_chat(user_input, response)
         return jsonify({"response": response})
 
     except Exception as e:

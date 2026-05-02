@@ -5,20 +5,21 @@ from datetime import datetime
 
 
 # 🔌 CONNECT TO MONGODB (SAFE FOR RENDER)
-def get_db():
-    client = MongoClient(os.getenv("MONGO_URI"))
-    return client["vaani_ai"]
+# ✅ CREATE CLIENT ONLY ONCE
+client = MongoClient(os.getenv("MONGO_URI"))
 
+# ✅ DATABASE
+db = client["vaani_ai"]
 
 # 📦 COLLECTIONS
 def get_users_collection():
-    return get_db()["users"]
+    return db["users"]
 
 def get_contact_collection():
-    return get_db()["contacts"]
+    return db["contacts"]
 
 def get_chat_collection():
-    return get_db()["chat_history"]
+    return db["chat_history"]
 
 
 # 👤 REGISTER USER
