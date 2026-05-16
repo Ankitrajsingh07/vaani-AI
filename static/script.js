@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    // =========================
+   
     // REGISTER
-    // =========================
+   
     function register() {
         fetch("/register", {
             method: "POST",
@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => alert(data.message));
     }
 
-    // =========================
+   
     // LOGIN
-    // =========================
+  
     function login() {
         let username = document.getElementById("username").value.trim();
         let password = document.getElementById("password").value.trim();
@@ -49,9 +49,9 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(() => alert("Login failed"));
     }
 
-    // =========================
+    
     // LOGOUT
-    // =========================
+   
     function logout() {
         fetch("/logout")
         .then(() => {
@@ -61,18 +61,18 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // =========================
+    
     // SPEAK
-    // =========================
+   
     function speak(text) {
         let speech = new SpeechSynthesisUtterance(text);
         speech.lang = "en-US";
         window.speechSynthesis.speak(speech);
     }
 
-    // =========================
+    
     // SEND MESSAGE
-    // =========================
+   
     function sendMessage(text) {
 
         let chat = document.getElementById("chat");
@@ -137,9 +137,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // =========================
     // VOICE INPUT
-    // =========================
+    
     function startVoice() {
         const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -169,9 +168,9 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 
-    // =========================
+    
     // NAVBAR
-    // =========================
+    
     function showSection(section) {
 
         let isLoggedIn = document.getElementById("chat-section").style.display === "block";
@@ -198,9 +197,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // =========================
+    
     // CONTACT FORM
-    // =========================
+    
     function sendContactMessage() {
 
         let name = document.getElementById("contact-name").value;
@@ -230,9 +229,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("contact-message").value = "";
     }
 
-    // =========================
+    
     // MAKE FUNCTIONS GLOBAL
-    // =========================
+    
     window.register = register;
     window.login = login;
     window.logout = logout;

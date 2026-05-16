@@ -56,7 +56,7 @@ def ask_ai(prompt):
 
 #  WEATHER FUNCTION
 def get_weather(city):
-    api_key = "fa8b806106ef9f83e81e91885629997b"   # 🔁 replace with your key
+    api_key = "fa8b806106ef9f83e81e91885629997b"   
 
     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric"
 

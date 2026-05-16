@@ -4,14 +4,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
 
-# 🔌 CONNECT TO MONGODB (SAFE FOR RENDER)
-# ✅ CREATE CLIENT ONLY ONCE
+#  CONNECT TO MONGODB (SAFE FOR RENDER)
+#  CREATE CLIENT ONLY ONCE
 client = MongoClient(os.getenv("MONGO_URI"))
 
-# ✅ DATABASE
+#  DATABASE
 db = client["vaani_ai"]
 
-# 📦 COLLECTIONS
+# COLLECTIONS
 def get_users_collection():
     return db["users"]
 
@@ -22,7 +22,7 @@ def get_chat_collection():
     return db["chat_history"]
 
 
-# 👤 REGISTER USER
+#  REGISTER USER
 def register_user(username, password):
     users = get_users_collection()
 
@@ -40,7 +40,7 @@ def register_user(username, password):
     return True
 
 
-# 🔐 LOGIN USER
+#  LOGIN USER
 def login_user(username, password):
     users = get_users_collection()
 
@@ -52,7 +52,7 @@ def login_user(username, password):
     return None
 
 
-# 💬 SAVE CHAT
+#  SAVE CHAT
 def save_chat(user_input, bot_response):
     chat = get_chat_collection()
 
@@ -63,7 +63,7 @@ def save_chat(user_input, bot_response):
     })
 
 
-# 📩 SAVE CONTACT MESSAGE
+# SAVE CONTACT MESSAGE
 def save_contact(name, email, message):
     contacts = get_contact_collection()
 
